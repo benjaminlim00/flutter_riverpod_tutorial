@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_riverpod_tutorial/counter_page.dart';
+
+import 'counter_page.dart';
+import 'list_page.dart';
 
 abstract class WebsocketClient {
   Stream<int> getCounterStream([int start]);
@@ -47,21 +49,36 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
-      navigationBar: const CupertinoNavigationBar(
-        middle: Text('Home'),
-      ),
-      child: Center(
-        child: CupertinoButton(
-          child: const Text('Go to Counter Page'),
-          onPressed: () {
-            Navigator.of(context).push(
-              CupertinoPageRoute(
-                builder: (context) => const CounterPage(),
-              ),
-            );
-          },
+        navigationBar: const CupertinoNavigationBar(
+          middle: Text('Home'),
         ),
-      ),
-    );
+        child: SafeArea(
+          child: Center(
+            child:
+                Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+              CupertinoButton(
+                  child: const Text('Go to Counter Page'),
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      CupertinoPageRoute(
+                        builder: (context) => const CounterPage(),
+                      ),
+                    );
+                  }),
+              const SizedBox(
+                height: 10,
+              ),
+              CupertinoButton(
+                  child: const Text('Go to List Page'),
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      CupertinoPageRoute(
+                        builder: (context) => const ListPage(),
+                      ),
+                    );
+                  })
+            ]),
+          ),
+        ));
   }
 }
